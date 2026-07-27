@@ -1,5 +1,8 @@
 pipeline {
   agent any
+  environment {
+    DOCKERHUB_CREDENTIALS = credentials('dockerhub-cred')
+  }  
   stages {
     stage('git scm update') {
       steps {
@@ -8,7 +11,8 @@ pipeline {
     }
     stage('Docker image build & push') {
       steps {
-        sh 'docker build -t jasonryu1991/ktcloudinfra4:0727 .'        
+        sh 'docker build -t jasonryu1991/ktcloudinfra4:0727 .'
+        echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin
         sh 'docker push jasonryu1991/ktcloudinfra4:0727'
       }
     }
