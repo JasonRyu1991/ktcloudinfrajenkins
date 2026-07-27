@@ -6,14 +6,9 @@ pipeline {
         git url: 'https://github.com/jasonryu1991/ktcloudinfrajenkins.git', branch: 'main'
       }
     }
-    stage('Docker image build') {
+    stage('Docker image build & push') {
       steps {
         sh 'docker build -t jasonryu1991/ktcloudinfra4:0727 .'        
-      }
-    }
-    stage('Docker image push') {
-      steps {
-        sh 'echo "dckr_pat_3m8RUZ0lA9c9V5JIlR_5-LakoVA" | docker login -u jasonryu1991 --password-stdin'
         sh 'docker push jasonryu1991/ktcloudinfra4:0727'
       }
     }
