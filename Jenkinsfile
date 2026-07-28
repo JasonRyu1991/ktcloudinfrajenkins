@@ -11,9 +11,9 @@ pipeline {
     }
     stage('Docker image build & push') {
       steps {
-        sh 'docker build -t jasonryu1991/ktcloudinfra4:0728 .'
+        sh 'docker build -t jasonryu1991/ktcloudinfra4:0727 .'
         sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-        sh 'docker push jasonryu1991/ktcloudinfra4:0728'
+        sh 'docker push jasonryu1991/ktcloudinfra4:0727'
       }
     }
     stage('delivery and deployment using k8s') {
